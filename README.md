@@ -4,6 +4,7 @@
 This project sets up an ESP32 microcontroller with a W5500 Ethernet module to run a web server. The server allows control and monitoring of connected devices via a REST API.
 
 ![alt text](https://github.com/akmalfadli/esp32-12ch-ssr-relay/blob/master/img/Pasted%20image.png?raw=true)
+
 ## Features
 - WebServer on ESP32 with W5500 Ethernet module
 - Static IP configuration
@@ -14,6 +15,8 @@ This project sets up an ESP32 microcontroller with a W5500 Ethernet module to ru
 - ESP32 (Wroom Module or similar)
 - W5500 Ethernet Module
 - 0.96 Oled LCD
+- 
+![alt text](https://github.com/akmalfadli/esp32-12ch-ssr-relay/blob/master/img/esp32-12ch-ssr-relay.png?raw=true)
 
 ## Software Requirements
 - Arduino IDE
