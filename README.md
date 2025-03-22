@@ -60,7 +60,7 @@ Features
    - Open the Arduino sketch.
    - Select your board (`ESP32 Wrover Module`).
    - Connect the ESP32 and upload the code.
-   - Github repo for Arduino code [a link](https://github.com/user/repo/blob/branch/other_file.md)
+   - Github repo for Arduino code [a link](https://github.com/akmalfadli/esp32-12ch-eth)
 
 ## Static IP Configuration
 Modify the `setup()` function in your Arduino sketch:
