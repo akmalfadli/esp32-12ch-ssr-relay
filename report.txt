@@ -1,0 +1,4 @@
+Info: Output directory '/home/fadli/developer/EE-Projects/wemos32-12-channel-relays-ssr-rev-2/img/schematic' created.
+Plotted to '/home/fadli/developer/EE-Projects/wemos32-12-channel-relays-ssr-rev-2/img/schematic/wemos32-12-channel-relays-ssr-rev-2.pdf'.
+
+Info: Done.
