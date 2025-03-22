@@ -1,53 +1,89 @@
-# PCB Design for 4-Channel Relays Based on ESP32-WROOM-32 Module
+# ESP32 + W5500 WebServer
 
-This repository contains the PCB design files, schematic, and 3D model image
-for a 4-channel relay board based on the ESP32-WROOM-32 module. The board is
-designed for controlling various electronic devices such as light, fans,
-motors, and more.
+## Overview
+This project sets up an ESP32 microcontroller with a W5500 Ethernet module to run a web server. The server allows control and monitoring of connected devices via a REST API.
 
 ## Features
+- WebServer on ESP32 with W5500 Ethernet module
+- Static IP configuration
+- REST API for controlling connected devices
+- Support for SPI clock speed adjustment for stable communication
 
-- Four independently controllable 5V relays.
-- ESP32-WROOM-32 module for wireless connectivity and easy programming.
-- Terminal block for easy integration to the electronic devices.
-- USB TYPE-C connector for power and programming
-- Small form factor for easy integration into any project.
+## Hardware Requirements
+- ESP32 (Wroom Module or similar)
+- W5500 Ethernet Module
 
-## Repository Contents
+## Software Requirements
+- Arduino IDE
+- ESP32 Board Package (Latest version)
+- Required libraries:
+  - `WebServer_ESP32_W5500`
+  - `Ethernet`
+  - `WiFi`
+  
+## Wiring Configuration
+| W5500 Pin | ESP32 Pin |
+|-----------|----------|
+| SCLK      | GPIO 19  |
+| MISO      | GPIO 23  |
+| MOSI      | GPIO 26  |
+| CS        | GPIO 27  |
+| INT       | GPIO 22  |
+| RESET     | GPIO 18  |
 
-- **PCB design files**: The KiCad project files for the PCB design.
-- **Schematic**: The circuit diagram of the design.
-- **3D model image**: A preview image of the 3D model of the board.
+## Installation & Setup
+1. **Install Arduino IDE** (if not installed already).
+2. **Install ESP32 Board Package**:
+   - Open Arduino IDE.
+   - Go to `File` > `Preferences`.
+   - Add `https://dl.espressif.com/dl/package_esp32_index.json` to "Additional Board Manager URLs".
+   - Go to `Tools` > `Board` > `Boards Manager`.
+   - Search for `ESP32` and install the latest version.
+3. **Install Required Libraries**:
+   - Open `Sketch` > `Include Library` > `Manage Libraries`.
+   - Search for `WebServer_ESP32_W5500` and install it.
+   - Install `Ethernet` and `WiFi` libraries.
+4. **Upload Code**:
+   - Open the Arduino sketch.
+   - Select your board (`ESP32 Wrover Module`).
+   - Connect the ESP32 and upload the code.
 
-## PCB Design
+## Static IP Configuration
+Modify the `setup()` function in your Arduino sketch:
+```cpp
+Ethernet.begin(mac, ip, myDns, gateway, subnet);
+```
+Example static IP settings:
+```cpp
+IPAddress ip(192, 168, 11, 51);
+IPAddress gateway(192, 168, 11, 1);
+IPAddress subnet(255, 255, 255, 0);
+IPAddress myDns(8, 8, 8, 8);
+```
 
-The PCB design is created using KiCad, an open-source software suite for
-electronic design automation(EDA). The design files include the Schematic, the
-PCB layout, and the Gerber files required for manufacturing.
+## API Endpoints
+| Method | Endpoint        | Description          |
+|--------|----------------|----------------------|
+| GET    | `/relay-state?ch=`      | Get device status   |
+| POST   | `/relay?ch=2&state=0`    | Turn relay ON and OFF      |
+| POST   | `set-auth?new-key`   |Set bearer token key     |
 
-The board include four 5V relays, each of which is controlled by a GPIO pin of
-the ESP32-WROOM-32 module. The module is also responsible for wireless
-connectivity and easy programming of the board. Terminal blocks are provided
-for easy connection to the electronic devices. The board also includes a USB
-TYPE-C connector for power and programming, providing a more robust and
-versatile interface than traditional USB connectors.
+## Troubleshooting
+### Compilation Errors
+- **Ensure ESP32 is selected** in `Tools` > `Board`.
+- **Check for duplicate libraries** in `Arduino/libraries/` and remove conflicting versions.
+- **Reduce SPI clock speed** if Ethernet is unstable:
+  ```cpp
+  #define ETH_SPI_CLOCK 8000000  // Set to 8MHz
+  ```
 
-## Schematic
-
-The Schematic shows the circuit diagram of the design, including the
-ESP32-WROOM-32 module, the relays, and the other components of the board.
-
-## 3D Model Image
-
-The 3D model image provides a preview of what the board looks like in a 3D view.
-This can be usefule for visualizing the board and how it will fit into your
-project.
-
-![3D Model Image](https://github.com/Lmanangka/esp32-4-channel-relays/blob/main/img/3d-model.png?raw=true)
+### Connection Issues
+- Verify the W5500 wiring.
+- Check if the router allows static IP assignments.
 
 ## License
+This project is open-source and licensed under the MIT License.
 
-This design is released under the CERN Open Hardware License Version 2 - Permissive.
-You are free to use, modify, and distribute the design as long as you include
-the license file in your distribution. See the [LICENSE](https://github.com/Lmanangka/esp32-4-channel-relays/blob/main/LICENSE)
-file for details.
+---
+Made with ❤️ by [Akmal Fadli]
+
