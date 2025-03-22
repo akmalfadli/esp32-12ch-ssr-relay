@@ -88,5 +88,5 @@ IPAddress myDns(8, 8, 8, 8);
 This project is open-source and licensed under the MIT License.
 
 ---
-Made with ❤️ by [Akmal Fadli]
+Made with ❤️ by Akmal Fadli - Perwira Teknologi Informasi
 
